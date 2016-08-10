@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -22,6 +26,7 @@ namespace Strife
     /// </summary>
     sealed partial class App : Application
     {
+        public ObservableCollection<CoreApplicationView> otherViews = new ObservableCollection<CoreApplicationView>();
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -35,12 +40,14 @@ namespace Strife
             this.Suspending += OnSuspending;
         }
 
+        int idCreate = 0;
+        List<int> idSaved = new List<int>();
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
 
 #if DEBUG
@@ -76,6 +83,30 @@ namespace Strife
                 // configuring the new page by passing required information as a navigation
                 // parameter
                 rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                idSaved.Add(ApplicationView.GetForCurrentView().Id);
+            }
+            else
+            {
+                var create = CoreApplication.CreateNewView();
+
+                await create.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    var frame = new Frame();
+                    frame.Navigate(typeof(MainPage), e.Arguments);
+                    Window.Current.Content = frame;
+                    Window.Current.Activate();
+
+                    idCreate = ApplicationView.GetForCurrentView().Id;
+                });
+
+                for (int i = idSaved.Count -1; i >= 0; i++)
+                {
+                    if (await ApplicationViewSwitcher.TryShowAsStandaloneAsync(
+                        idCreate, ViewSizePreference.UseMinimum,
+                        idSaved[i], ViewSizePreference.UseMinimum)
+                        ) break;
+                }
+                idSaved.Add(idCreate);
             }
             // Ensure the current window is active
             Window.Current.Activate();
