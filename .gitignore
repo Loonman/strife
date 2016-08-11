@@ -243,3 +243,4 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+Strife/Strife_TemporaryKey.pfx.snk

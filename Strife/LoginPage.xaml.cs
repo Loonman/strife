@@ -41,7 +41,26 @@ namespace Strife
 
         private void loginButton_Click(object sender, RoutedEventArgs e)
         {
+            var password = strifePassword.Password;
+            var userName = strifeLogin.Text;
 
+            //Log in with discord API
+
+            //Check for valid response
+            var result = false;
+            string failedPart = "username";
+
+            if (result)
+            {
+                //Proceed to the mainpage or something?
+                //Main page should be a split view with the left hand side
+                // showing available channels and friends or something
+                //And the right part changing depending on the channel/context
+            }
+            else
+            {
+                loginError.Text = "Login failed: invalid " + failedPart;
+            }
         }
 
 

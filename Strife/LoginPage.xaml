@@ -37,6 +37,13 @@
                      RelativePanel.AlignHorizontalCenterWithPanel="True"
                      Margin="0,0,0,15" 
                      GotFocus="strifeLogin_PointerReleased"/>
+            <TextBlock x:Name="loginError"
+                       RelativePanel.Below="loginButton"
+                       RelativePanel.AlignHorizontalCenterWithPanel="True"
+                       Text=""
+                       Foreground="DarkRed"
+                       Margin="0,15,0,15"
+                       />
         </RelativePanel>
     </Grid>
 </Page>
