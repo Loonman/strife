@@ -138,9 +138,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Discord-UWP">
-      <HintPath>..\..\Discord-UWP\Discord-UWP\bin\Release\Discord-UWP.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\..\Discord-UWP\Discord-UWP\Discord-UWP.csproj">
+      <Project>{b15b5192-7746-4797-8838-488d4367f399}</Project>
+      <Name>Discord-UWP</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
