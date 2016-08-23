@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Strife", "Strife\Strife.csproj", "{71B43075-1E30-4987-A516-F7326EAA3642}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Discord-UWP", "..\Discord-UWP\Discord-UWP\Discord-UWP.csproj", "{B15B5192-7746-4797-8838-488D4367F399}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Discord-UWP", ".\Discord-UWP\Discord-UWP\Discord-UWP.csproj", "{B15B5192-7746-4797-8838-488D4367F399}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
