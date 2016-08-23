@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -14,6 +15,8 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Notifications;
 using Windows.Data.Xml.Dom;
+using login = Discord_UWP.API.Login;
+using auth = Discord_UWP.Authentication;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -30,37 +33,22 @@ namespace Strife
             this.InitializeComponent();
         }
 
-        private void strifeLogin_PointerReleased(object sender, RoutedEventArgs e)
-        {
-            var txtBox = ((Windows.UI.Xaml.Controls.TextBox)sender);
-            if (txtBox.Text == "Enter your e-mail")
-            {
-                txtBox.Text = "";
-            }
-        }
-
-        private void loginButton_Click(object sender, RoutedEventArgs e)
+        private async void loginButton_Click(object sender, RoutedEventArgs e)
         {
             var password = strifePassword.Password;
             var userName = strifeLogin.Text;
 
-            //Log in with discord API
-
-            //Check for valid response
-            var result = false;
-            string failedPart = "username";
-
-            if (result)
+            try
             {
-                //Proceed to the mainpage or something?
-                //Main page should be a split view with the left hand side
-                // showing available channels and friends or something
-                //And the right part changing depending on the channel/context
+                login.Models.LoginResult result = await this.sendLoginRequest(userName, password);
+                loginError.Text = $"You did it nerd: {result.Token}";
             }
-            else
+            catch
             {
-                loginError.Text = "Login failed: invalid " + failedPart;
+                loginError.Text = "Login failed: invalid username or password";
             }
+
+           
         }
 
 
@@ -91,6 +79,28 @@ namespace Strife
 
             ToastNotificationManager.CreateToastNotifier().Show(toast);
 
+        }
+
+        private async Task<login.Models.LoginResult> sendLoginRequest(string email, string password)
+        {
+
+            var config = new Discord_UWP.API.DiscordApiConfiguration
+            {
+                BaseUrl = "https://discordapp.com/api"
+            };
+
+            var authenticator = new auth.DiscordAuthenticator("I'm some george bullshit");
+            var restFactory = new Discord_UWP.API.RestFactory(config, authenticator);
+
+            login.ILoginService loginService = restFactory.GetLoginService();
+
+            var loginAPIRequest = new login.Models.LoginRequest
+            {
+                Email = email,
+                Password = password
+            };
+
+            return await loginService.Login(loginAPIRequest);
         }
 
     }

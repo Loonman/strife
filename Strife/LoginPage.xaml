@@ -31,12 +31,10 @@
                      RelativePanel.Above="strifePassword"
                      HorizontalAlignment="Center" 
                      TextWrapping="Wrap" 
-                     Text="Enter your e-mail" 
                      VerticalAlignment="Center"
                      Width="225"
                      RelativePanel.AlignHorizontalCenterWithPanel="True"
-                     Margin="0,0,0,15" 
-                     GotFocus="strifeLogin_PointerReleased"/>
+                     Margin="0,0,0,25"/>
             <TextBlock x:Name="loginError"
                        RelativePanel.Below="loginButton"
                        RelativePanel.AlignHorizontalCenterWithPanel="True"
@@ -44,6 +42,14 @@
                        Foreground="DarkRed"
                        Margin="0,15,0,15"
                        />
+            <TextBlock x:Name="emailPrompt"
+                       RelativePanel.Above="strifeLogin"
+                       RelativePanel.AlignHorizontalCenterWith="strifeLogin"
+                       Text="Username"/>
+            <TextBlock x:Name="passwordPrompt"
+                       RelativePanel.Above="strifePassword"
+                       RelativePanel.AlignHorizontalCenterWith="strifeLogin"
+                       Text="Password"/>
         </RelativePanel>
     </Grid>
 </Page>
