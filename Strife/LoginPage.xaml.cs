@@ -17,6 +17,7 @@ using Windows.UI.Notifications;
 using Windows.Data.Xml.Dom;
 using login = Discord_UWP.API.Login;
 using auth = Discord_UWP.Authentication;
+using Discord_UWP.API;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -89,8 +90,7 @@ namespace Strife
                 BaseUrl = "https://discordapp.com/api"
             };
 
-            var authenticator = new auth.DiscordAuthenticator("I'm some george bullshit");
-            var restFactory = new Discord_UWP.API.RestFactory(config, authenticator);
+            var restFactory = new BasicRestFactory(config);
 
             login.ILoginService loginService = restFactory.GetLoginService();
 
