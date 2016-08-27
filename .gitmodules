@@ -1,3 +1,3 @@
 [submodule "Discord-UWP"]
-	path = ./Discord-UWP
+	path = Discord-UWP
 	url = https://github.com/gantonious/Discord-UWP.git
