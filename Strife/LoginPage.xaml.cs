@@ -28,7 +28,6 @@ namespace Strife
     /// </summary>
     public sealed partial class LoginPage : Page
     {
-        MainPage rootPage = MainPage.Current;
         public LoginPage()
         {
             this.InitializeComponent();

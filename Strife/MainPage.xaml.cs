@@ -29,36 +29,10 @@ namespace Strife
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public static MainPage Current;
-
         public MainPage()
         {
-            
             this.InitializeComponent();
-
-            Current = this;
-            NavigateToLoginPage();
         }
-
-
-        private int viewId;
-        private async void NavigateToLoginPage()
-        {
-           
-            var currentId = ApplicationView.GetForCurrentView().Id;
-            var view = CoreApplication.CreateNewView();
-            await view.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
-                var frame = new Frame();
-                frame.Navigate(typeof(LoginPage));
-                Window.Current.Content = frame;
-                Window.Current.Activate();
-
-                viewId = ApplicationView.GetForCurrentView().Id;
-            });
-            
-            await ApplicationViewSwitcher.SwitchAsync(viewId, currentId);
-        }
-
     }
 }
+   
