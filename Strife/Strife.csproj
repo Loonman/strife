@@ -95,6 +95,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Domain\MessageStorage\IMessageStore.cs" />
+    <Compile Include="Domain\MessageStorage\MessageProvider.cs" />
+    <Compile Include="Domain\MessageStorage\MessageStore.cs" />
     <Compile Include="LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
