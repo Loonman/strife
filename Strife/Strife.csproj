@@ -95,6 +95,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Domain\DirectMessageChannelStorage\DirectMessageChannelStore.cs" />
+    <Compile Include="Domain\DirectMessageChannelStorage\IDirectMessageChannelStore.cs" />
     <Compile Include="Domain\GuildChannelStorage\GuildChannelStore.cs" />
     <Compile Include="Domain\GuildChannelStorage\GuildChannelProvider.cs" />
     <Compile Include="Domain\GuildStorage\GuildStore.cs" />
