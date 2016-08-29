@@ -95,6 +95,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Domain\GuildStorage\GuildStore.cs" />
+    <Compile Include="Domain\GuildStorage\IGuildStore.cs" />
     <Compile Include="Domain\MessageStorage\IMessageStore.cs" />
     <Compile Include="Domain\MessageStorage\MessageProvider.cs" />
     <Compile Include="Domain\MessageStorage\MessageStore.cs" />
