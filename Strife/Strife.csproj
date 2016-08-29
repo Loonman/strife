@@ -115,6 +115,7 @@
     <Compile Include="SplashPage.xaml.cs">
       <DependentUpon>SplashPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\DictionaryExtensions.cs" />
     <Compile Include="ViewModels\ChannelsViewModel.cs" />
     <Compile Include="ViewModels\GuildsViewModel.cs" />
     <Compile Include="ViewModels\GuildViewModel.cs" />
@@ -161,6 +162,7 @@
       <Name>Discord-UWP</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
