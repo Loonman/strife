@@ -67,9 +67,10 @@
 
         <SplitView.Content>
             <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
                 <ListView x:Name="messagesListView"
                           ItemsSource="{x:Bind MessagesViewModel.Messages}"
@@ -87,6 +88,44 @@
                     </ListView.ItemTemplate>
 
                 </ListView>
+
+                <Border BorderBrush="#FFC9C9C9" 
+                        BorderThickness="0,1,0,0" 
+                        VerticalAlignment="Bottom"
+                        Grid.Row="1">
+
+                    <RelativePanel VerticalAlignment="Bottom"
+                                   MaxWidth="700" >
+
+                        <Button x:Name="attachButton" 
+                                Height="50"
+                                Width="50"
+                                FontSize="22"
+                                FontFamily="Segoe MDL2 Assets" 
+                                Content="&#xE16C;"
+                                RelativePanel.AlignBottomWithPanel="True" Background="#33FFFFFF" />
+
+                        <TextBox x:Name="sendMessageBox"
+                                 TextWrapping="Wrap"
+                                 BorderThickness="0"
+                                 Text=""
+                                 PlaceholderText="Send Message"
+                                 RelativePanel.RightOf="attachButton"
+                                 RelativePanel.LeftOf="sendButton"
+                                 RelativePanel.AlignBottomWithPanel="True" 
+                                 Padding="10,10,6,17" />
+
+                        <Button x:Name="sendButton" 
+                                RelativePanel.AlignRightWithPanel="True"
+                                RelativePanel.AlignBottomWithPanel="True"
+                                FontFamily="Segoe MDL2 Assets"
+                                Content="&#xE724;"
+                                Width="50" 
+                                Height="50"
+                                FontSize="22" Background="#33FFFFFF"/>
+
+                    </RelativePanel>
+                </Border>
             </Grid>
         </SplitView.Content>
     </SplitView>
