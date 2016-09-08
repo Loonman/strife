@@ -8,72 +8,87 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <SplitView x:Name="MySplitView"  
+               IsPaneOpen="True" 
+               CompactPaneLength="0" 
+               OpenPaneLength="400" 
+               DisplayMode="CompactOverlay">
 
-        <ListView x:Name="guildsListView"
-                  ItemsSource="{x:Bind GuildsViewModel.Guilds}"
-                  Grid.Column="0">
+        <SplitView.Pane>
+            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
 
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="viewModels:GuildViewModel">
-                    <StackPanel>
-                        <Ellipse x:Name="guildIcon" 
-                                 Height="45" 
-                                 Width="45">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="{x:Bind GuildIconUrl}"/>
-                            </Ellipse.Fill>
-                        </Ellipse>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+                <ListView x:Name="guildsListView"
+                          ItemsSource="{x:Bind GuildsViewModel.Guilds}"
+                          Grid.Column="0">
 
-        </ListView>
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="viewModels:GuildViewModel">
+                            <StackPanel>
+                                <Ellipse x:Name="guildIcon" 
+                                         Height="45" 
+                                         Width="45">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="{x:Bind GuildIconUrl}"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
 
-        <ListView x:Name="channelsListView"
-                  ItemsSource="{x:Bind ChannelsViewModel.TextChannels}"
-                  Grid.Column="1">
-            
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="Padding" Value="0" />
-                    <Setter Property="MinHeight" Value="0" />
-                </Style>
-            </ListView.ItemContainerStyle>
-            
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="viewModels:TextChannelViewModel">
-                    <StackPanel>
-                        <TextBlock Name="channelName"
-                                   Text="{x:Bind Name}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+                </ListView>
 
-        </ListView>
-                  
-        <ListView x:Name="messagesListView"
-                  ItemsSource="{x:Bind MessagesViewModel.Messages}"
-                  Grid.Column="2">
+                <ListView x:Name="channelsListView"
+                          ItemsSource="{x:Bind ChannelsViewModel.TextChannels}"
+                          Grid.Column="1">
 
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="viewModels:MessageViewModel">
-                    <StackPanel>
-                        <TextBlock Name="username"
-                                   Text="{x:Bind Username}"/>
-                        <TextBlock Name="messageContent"
-                                   Text="{x:Bind Content}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Padding" Value="0" />
+                            <Setter Property="MinHeight" Value="0" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
 
-        </ListView>
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="viewModels:TextChannelViewModel">
+                            <StackPanel>
+                                <TextBlock Name="channelName"
+                                           Text="{x:Bind Name}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
 
-    </Grid>
+                </ListView>
+            </Grid>
+        </SplitView.Pane>
 
+        <SplitView.Content>
+            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <ListView x:Name="messagesListView"
+                          ItemsSource="{x:Bind MessagesViewModel.Messages}"
+                          Grid.Column="0">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="viewModels:MessageViewModel">
+                            <StackPanel>
+                                <TextBlock Name="username"
+                                           Text="{x:Bind Username}"/>
+                                <TextBlock Name="messageContent"
+                                           Text="{x:Bind Content}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+            </Grid>
+        </SplitView.Content>
+    </SplitView>
+    
 </Page>
