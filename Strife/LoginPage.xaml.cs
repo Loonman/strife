@@ -42,6 +42,7 @@ namespace Strife
             {
                 login.Models.LoginResult result = await this.sendLoginRequest(userName, password);
                 loginError.Text = $"You did it nerd: {result.Token}";
+                this.Frame.Navigate(typeof(MainPage), result.Token);
             }
             catch
             {

@@ -37,10 +37,10 @@ namespace Strife
         public GuildsViewModel GuildsViewModel { get; set; }
         public ChannelsViewModel ChannelsViewModel { get; set; }
         public MessagesViewModel MessagesViewModel { get; set; }
+        public DiscordAuthenticator authenticator { get; set;  }
 
         public MainPage()
-        {
-            InitAsync();            
+        {       
         }
 
         public async void InitAsync()
@@ -55,7 +55,7 @@ namespace Strife
                 BaseUrl = "wss://gateway.discord.gg/"
             };
 
-            var authenticator = new DiscordAuthenticator("PUT TOKEN HERE");
+            
             var authenticatedRestFactory = new AuthenticatedRestFactory(apiConfig, authenticator);
 
             var channelService = authenticatedRestFactory.GetChannelService();
@@ -79,6 +79,12 @@ namespace Strife
             GuildsViewModel = new GuildsViewModel(guildStore);
 
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            authenticator = new DiscordAuthenticator((String)e.Parameter);
+            InitAsync();
         }
     }
 }

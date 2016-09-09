@@ -82,7 +82,7 @@ namespace Strife
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                rootFrame.Navigate(typeof(SplashPage), e.Arguments);
                 idSaved.Add(ApplicationView.GetForCurrentView().Id);
             }
             else
@@ -92,7 +92,7 @@ namespace Strife
                 await create.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
                     var frame = new Frame();
-                    frame.Navigate(typeof(MainPage), e.Arguments);
+                    frame.Navigate(typeof(SplashPage), e.Arguments);
                     Window.Current.Content = frame;
                     Window.Current.Activate();
 
