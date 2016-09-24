@@ -33,7 +33,7 @@
                 </Grid.ColumnDefinitions>
 
                 <ListView x:Name="guildsListView"
-                          ItemsSource="{x:Bind GuildsViewModel.Guilds}"
+                          ItemsSource="{x:Bind MainPageViewModel.GuildsViewModel.Guilds}"
                           Grid.Column="0">
 
                     <ListView.ItemTemplate>
@@ -41,7 +41,8 @@
                             <StackPanel>
                                 <Ellipse x:Name="guildIcon" 
                                          Height="45" 
-                                         Width="45">
+                                         Width="45"
+                                         Tapped="guildIcon_Tapped">
                                     <Ellipse.Fill>
                                         <ImageBrush ImageSource="{x:Bind GuildIconUrl}"/>
                                     </Ellipse.Fill>
@@ -53,7 +54,7 @@
                 </ListView>
 
                 <ListView x:Name="channelsListView"
-                          ItemsSource="{x:Bind ChannelsViewModel.TextChannels}"
+                          ItemsSource="{x:Bind MainPageViewModel.ChannelsViewModel.TextChannels, Mode=OneWay}"
                           Grid.Column="1">
 
                     <ListView.ItemContainerStyle>
@@ -65,7 +66,7 @@
 
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="viewModels:TextChannelViewModel">
-                            <StackPanel>
+                            <StackPanel Tapped="StackPanel_Tapped">
                                 <TextBlock Name="channelName"
                                            Text="{x:Bind Name}"/>
                             </StackPanel>
@@ -84,7 +85,7 @@
                 </Grid.RowDefinitions>
 
                 <ListView x:Name="messagesListView"
-                          ItemsSource="{x:Bind MessagesViewModel.Messages}"
+                          ItemsSource="{x:Bind MainPageViewModel.MessagesViewModel.Messages, Mode=OneWay}"
                           Grid.Column="0">
 
                     <ListView.ItemTemplate>

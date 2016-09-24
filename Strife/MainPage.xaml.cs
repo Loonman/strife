@@ -24,6 +24,7 @@ using Strife.Domain;
 using Strife.Domain.MessageStorage;
 using Strife.Domain.GuildChannelStorage;
 using Strife.Domain.GuildStorage;
+using Windows.UI.Xaml.Shapes;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -34,10 +35,8 @@ namespace Strife
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public GuildsViewModel GuildsViewModel { get; set; }
-        public ChannelsViewModel ChannelsViewModel { get; set; }
-        public MessagesViewModel MessagesViewModel { get; set; }
-        public DiscordAuthenticator authenticator { get; set;  }
+        public MainPageViewModel MainPageViewModel { get; set; }
+        public DiscordAuthenticator authenticator { get; set; }
 
         public MainPage()
         {       
@@ -67,16 +66,17 @@ namespace Strife
             await gateway.ConnectAsync();
 
             var messageStore = new MessageStore(channelService, gateway);
-            var messageProvider = new MessageProvider(messageStore, "81384956881809408");
-
-            var channelStore = new GuildChannelStore(guildService, gateway);
-            var channelProvider = new GuildChannelProvider(channelStore, "81384788765712384");
-
+            var guildChannelStore = new GuildChannelStore(guildService, gateway);
             var guildStore = new GuildStore(userService);
+
+            MainPageViewModel = new MainPageViewModel(guildStore, guildChannelStore, messageStore);
+
+            /*var messageProvider = new MessageProvider(messageStore, "81384956881809408");
+            var channelProvider = new GuildChannelProvider(guildChannelStore, "81384788765712384");
 
             MessagesViewModel = new MessagesViewModel(messageProvider);
             ChannelsViewModel = new ChannelsViewModel(channelProvider);
-            GuildsViewModel = new GuildsViewModel(guildStore);
+            GuildsViewModel = new GuildsViewModel(guildStore);*/
 
             this.InitializeComponent();
         }
@@ -85,6 +85,18 @@ namespace Strife
         {
             authenticator = new DiscordAuthenticator((String)e.Parameter);
             InitAsync();
+        }
+
+        private void guildIcon_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            GuildViewModel guild = ((sender as Ellipse).DataContext as GuildViewModel);
+            MainPageViewModel.OnGuildTapped(guild);
+        }
+
+        private void StackPanel_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            TextChannelViewModel guild = ((sender as StackPanel).DataContext as TextChannelViewModel);
+            MainPageViewModel.OnChannelTapped(guild);
         }
     }
 }
