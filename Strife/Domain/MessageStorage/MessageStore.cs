@@ -70,6 +70,16 @@ namespace Strife.Domain.MessageStorage
             return serverMessages.OrderBy(m => m.Timestamp);
         }
 
+        public async Task CreateMessageAsync(string channelId, string content)
+        {
+            var messageUpsert = new MessageUpsert
+            {
+                Content = content
+            };
+
+            await _channelService.CreateMessage(channelId, messageUpsert);
+        }
+
         public async Task EditMessageAsync(string channelId, string messageId, string newContent)
         {
             var editMessage = new EditMessage
@@ -104,7 +114,12 @@ namespace Strife.Domain.MessageStorage
 
         private void OnMessageCreated(object sender, GatewayEventArgs<Message> e)
         {
-           
+            var eventArgs = new MessageCreatedEventArgs
+            {
+                Message = e.EventData
+            };
+
+            MessageCreated?.Invoke(sender, eventArgs);
         }
 
         private void OnMessageUpdated(object sender, GatewayEventArgs<Message> e)

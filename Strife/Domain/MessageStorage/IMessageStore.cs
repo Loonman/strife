@@ -31,6 +31,7 @@ namespace Strife.Domain.MessageStorage
 
         Task<Message> GetMessageAsync(string channelId, string messageId);
         Task<IEnumerable<Message>> GetMessagesAsync(string channelId);
+        Task CreateMessageAsync(string channelId, string content);
         Task EditMessageAsync(string channelId, string messageId, string newContent);
         Task DeleteMessageAsync(string channelId, string messageId);
     }

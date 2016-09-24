@@ -1,6 +1,7 @@
 ﻿using Discord_UWP.SharedModels;
 using Strife.Domain;
 using Strife.Domain.MessageStorage;
+using Strife.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,20 +11,42 @@ using System.Threading.Tasks;
 
 namespace Strife.ViewModels
 {
-    public class MessagesViewModel
+    public class MessagesViewModel : NotificationBase
     {
         private readonly MessageProvider _messageProvider;
+        private string messageFieldContent = "";
+
+        public string MessageFieldContent
+        {
+            get { return messageFieldContent; }
+            set { SetProperty(ref messageFieldContent, value); }
+        }
 
         public ObservableCollection<MessageGroupViewModel> MessageGroups { get; set; } = new ObservableCollection<MessageGroupViewModel>();
 
         public MessagesViewModel(MessageProvider messageProvider)
         {
             _messageProvider = messageProvider;
-
+            _messageProvider.MessageCreated += OnMessageCreated;
             LoadBaseMessages();
         }
 
-        public async void LoadBaseMessages()
+        private void OnMessageCreated(object sender, MessageCreatedEventArgs e)
+        {
+            ThreadingUtils.DoOnMainThread(() => AddMessage(e.Message));
+        }
+
+        public async void OnSendClick()
+        {
+            if (!String.IsNullOrEmpty(MessageFieldContent))
+            {
+                var task = _messageProvider.CreateMessageAsync(MessageFieldContent);
+                MessageFieldContent = "";
+                await task;
+            }
+        }
+
+        private async void LoadBaseMessages()
         {
             var messages = await _messageProvider.GetMessagesAsync();
             messages.ToList().ForEach(AddMessage);

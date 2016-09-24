@@ -169,7 +169,7 @@
                         <TextBox x:Name="sendMessageBox"
                                  TextWrapping="Wrap"
                                  BorderThickness="0"
-                                 Text=""
+                                 Text="{x:Bind MainPageViewModel.MessagesViewModel.MessageFieldContent, Mode=TwoWay}"
                                  PlaceholderText="Send Message"
                                  RelativePanel.RightOf="attachButton"
                                  RelativePanel.LeftOf="sendButton"
@@ -177,6 +177,7 @@
                                  Padding="10,10,6,17" />
 
                         <Button x:Name="sendButton" 
+                                Click="{x:Bind MainPageViewModel.MessagesViewModel.OnSendClick}"
                                 RelativePanel.AlignRightWithPanel="True"
                                 RelativePanel.AlignBottomWithPanel="True"
                                 FontFamily="Segoe MDL2 Assets"

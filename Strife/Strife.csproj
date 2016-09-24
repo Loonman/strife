@@ -117,6 +117,7 @@
       <DependentUpon>SplashPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\DictionaryExtensions.cs" />
+    <Compile Include="Utils\ThreadingUtils.cs" />
     <Compile Include="ViewModels\ChannelsViewModel.cs" />
     <Compile Include="ViewModels\GuildsViewModel.cs" />
     <Compile Include="ViewModels\GuildViewModel.cs" />

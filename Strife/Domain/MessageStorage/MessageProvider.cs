@@ -36,6 +36,11 @@ namespace Strife.Domain.MessageStorage
             return await _messageStore.GetMessagesAsync(_channelId);
         }
 
+        public async Task CreateMessageAsync(string content)
+        {
+            await _messageStore.CreateMessageAsync(_channelId, content);
+        }
+
         public async Task EditMessageAsync(string messageId, string newContent)
         {
             await _messageStore.EditMessageAsync(_channelId, messageId, newContent);
