@@ -1,4 +1,5 @@
-﻿using Strife.Domain;
+﻿using Discord_UWP.SharedModels;
+using Strife.Domain;
 using Strife.Domain.MessageStorage;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace Strife.ViewModels
     {
         private readonly MessageProvider _messageProvider;
 
-        public ObservableCollection<MessageViewModel> Messages { get; set; } = new ObservableCollection<MessageViewModel>();
+        public ObservableCollection<MessageGroupViewModel> MessageGroups { get; set; } = new ObservableCollection<MessageGroupViewModel>();
 
         public MessagesViewModel(MessageProvider messageProvider)
         {
@@ -25,10 +26,33 @@ namespace Strife.ViewModels
         public async void LoadBaseMessages()
         {
             var messages = await _messageProvider.GetMessagesAsync();
+            messages.ToList().ForEach(AddMessage);
+        }
 
-            messages.Select(MessageViewModel.FromMessage)
-                    .ToList()
-                    .ForEach(m => Messages.Add(m));
+        public void AddMessage(Message message)
+        {
+            var lastMessageGroup = MessageGroups.LastOrDefault();
+
+            if (lastMessageGroup != null && lastMessageGroup.UserId == message.User.Id)
+            {
+                AppendMessageToMessageGroup(lastMessageGroup, message);
+            } else
+            {
+                AddNewMessageGroup(message);
+            }
+        }
+
+        private void AppendMessageToMessageGroup(MessageGroupViewModel messageGroup, Message message)
+        {
+            messageGroup.AddMessage(message);
+        }
+
+        private void AddNewMessageGroup(Message message)
+        {
+            var messageGroup = new MessageGroupViewModel(message.User);
+            messageGroup.AddMessage(message);
+
+            MessageGroups.Add(messageGroup);
         }
     }
 }

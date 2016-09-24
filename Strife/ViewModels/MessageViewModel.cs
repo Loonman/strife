@@ -9,18 +9,14 @@ namespace Strife.ViewModels
 {
     public class MessageViewModel
     {
-        public string Id { get; set; }
-        public string Username { get; set; }
-        public string Content { get; set; }
+        private readonly Message _message;
 
-        public static MessageViewModel FromMessage(Message message)
+        public string Id => _message.Id;
+        public string Content => _message.Content;
+
+        public MessageViewModel(Message message)
         {
-            return new MessageViewModel
-            {
-                Id = message.Id,
-                Username = message.User.Username,
-                Content = message.Content
-            };
-        }  
+            _message = message;
+        }
     }
 }

@@ -96,17 +96,55 @@
                 </Grid.RowDefinitions>
 
                 <ListView x:Name="messagesListView"
-                          ItemsSource="{x:Bind MainPageViewModel.MessagesViewModel.Messages, Mode=OneWay}"
+                          ItemsSource="{x:Bind MainPageViewModel.MessagesViewModel.MessageGroups, Mode=OneWay}"
                           Grid.Column="0">
 
                     <ListView.ItemTemplate>
-                        <DataTemplate x:DataType="viewModels:MessageViewModel">
-                            <StackPanel>
-                                <TextBlock Name="username"
-                                           Text="{x:Bind Username}"/>
-                                <TextBlock Name="messageContent"
-                                           Text="{x:Bind Content}" />
-                            </StackPanel>
+                        <DataTemplate x:DataType="viewModels:MessageGroupViewModel">
+
+                            <RelativePanel>
+                                <Ellipse x:Name="image" Height="45" Width="45" Margin="0,4,0,0">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="{x:Bind UserAvatar}"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+
+                                <StackPanel RelativePanel.RightOf="image" 
+                                            Margin="16,0,0,0">
+
+                                    <TextBlock Text="{x:Bind UserName}" 
+                                                Margin="0,0,0,0"
+                                                FontSize="18"          
+                                                FontWeight="SemiBold"
+                                                Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
+
+                                    <ListView x:Name="messages"
+                                                SelectionMode="None" 
+                                                ItemsSource="{x:Bind Messages, Mode=OneWay}" 
+                                                Padding="0,0,0,4" >
+
+                                        <ListView.ItemContainerStyle>
+                                            <Style TargetType="ListViewItem">
+                                                <Setter Property="Padding" Value="0" />
+                                                <Setter Property="Margin" Value="0,0,0,4" />
+                                                <Setter Property="MinHeight" Value="0" />
+                                            </Style>
+                                        </ListView.ItemContainerStyle>
+
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate x:DataType="viewModels:MessageViewModel">
+                                                <TextBlock Text="{x:Bind Content}" 
+                                                            FontSize="16"
+                                                            TextWrapping="Wrap"
+                                                            Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}" 
+                                                            Opacity="0.8"/>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+
+                                    </ListView>
+                                </StackPanel>
+                            </RelativePanel>
+
                         </DataTemplate>
                     </ListView.ItemTemplate>
 

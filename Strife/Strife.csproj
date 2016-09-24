@@ -121,6 +121,7 @@
     <Compile Include="ViewModels\GuildsViewModel.cs" />
     <Compile Include="ViewModels\GuildViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\MessageGroupViewModel.cs" />
     <Compile Include="ViewModels\MessagesViewModel.cs" />
     <Compile Include="ViewModels\MessageViewModel.cs" />
     <Compile Include="ViewModels\TextChannelViewModel.cs" />
