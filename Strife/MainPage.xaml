@@ -14,7 +14,7 @@
                 <Grid/>
             </CommandBar.Content>
 
-            <AppBarButton Icon="World" Label="appbarbutton"/>
+            <AppBarButton Icon="World" Label="appbarbutton" Tapped="AppBarButton_Tapped"/>
             <AppBarButton Icon="Contact" Label="appbarbutton"/>
         </CommandBar>
     </Page.BottomAppBar>
@@ -22,7 +22,6 @@
     <SplitView x:Name="MySplitView"  
                IsPaneOpen="True" 
                CompactPaneLength="0" 
-               OpenPaneLength="400" 
                DisplayMode="CompactOverlay">
 
         <SplitView.Pane>
@@ -34,6 +33,7 @@
 
                 <ListView x:Name="guildsListView"
                           ItemsSource="{x:Bind MainPageViewModel.GuildsViewModel.Guilds}"
+                          Background="#1E2124"
                           Grid.Column="0">
 
                     <ListView.ItemTemplate>
@@ -52,28 +52,39 @@
                     </ListView.ItemTemplate>
 
                 </ListView>
+                
+                <StackPanel Orientation="Vertical"
+                            Grid.Column="1"
+                            Background="#2E3136">
 
-                <ListView x:Name="channelsListView"
-                          ItemsSource="{x:Bind MainPageViewModel.ChannelsViewModel.TextChannels, Mode=OneWay}"
-                          Grid.Column="1">
+                    <TextBlock Name="textChannelsHeader"
+                               Text="Text Channels"
+                               Foreground="White"
+                               Margin="8"/>
+                    
+                    <ListView x:Name="channelsListView"
+                          ItemsSource="{x:Bind MainPageViewModel.ChannelsViewModel.TextChannels, Mode=OneWay}">
 
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="Padding" Value="0" />
-                            <Setter Property="MinHeight" Value="0" />
-                        </Style>
-                    </ListView.ItemContainerStyle>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Padding" Value="0" />
+                                <Setter Property="MinHeight" Value="0" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
 
-                    <ListView.ItemTemplate>
-                        <DataTemplate x:DataType="viewModels:TextChannelViewModel">
-                            <StackPanel Tapped="StackPanel_Tapped">
-                                <TextBlock Name="channelName"
-                                           Text="{x:Bind Name}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="viewModels:TextChannelViewModel">
+                                <StackPanel Tapped="StackPanel_Tapped">
+                                    <TextBlock Name="channelName"
+                                               Text="{x:Bind Name}"
+                                               Margin="8,4"
+                                               Foreground="White"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
 
-                </ListView>
+                    </ListView>
+                </StackPanel>
             </Grid>
         </SplitView.Pane>
 

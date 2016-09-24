@@ -98,6 +98,11 @@ namespace Strife
             TextChannelViewModel guild = ((sender as StackPanel).DataContext as TextChannelViewModel);
             MainPageViewModel.OnChannelTapped(guild);
         }
+
+        private void AppBarButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
+        }
     }
 }
    
