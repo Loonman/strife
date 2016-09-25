@@ -41,7 +41,7 @@ namespace Strife
             await view.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 var frame = new Frame();
-                frame.Navigate(typeof(MainPage));
+                frame.Navigate(typeof(LoginPage));
                 Window.Current.Content = frame;
                 Window.Current.Activate();
 
