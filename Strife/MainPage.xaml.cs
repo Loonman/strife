@@ -25,6 +25,7 @@ using Strife.Domain.MessageStorage;
 using Strife.Domain.GuildChannelStorage;
 using Strife.Domain.GuildStorage;
 using Windows.UI.Xaml.Shapes;
+using System.Collections.Specialized;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -81,6 +82,11 @@ namespace Strife
             this.InitializeComponent();
         }
 
+        private void OnMessagesListChange(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            messagesListView.ScrollIntoView(messagesListView.Items[messagesListView.Items.Count - 1]);
+        }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             authenticator = new DiscordAuthenticator((String)e.Parameter);
@@ -97,12 +103,14 @@ namespace Strife
         {
             TextChannelViewModel guild = ((sender as StackPanel).DataContext as TextChannelViewModel);
             MainPageViewModel.OnChannelTapped(guild);
+            ((INotifyCollectionChanged)messagesListView.ItemsSource).CollectionChanged += OnMessagesListChange;
         }
 
         private void AppBarButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
         }
+
     }
 }
    
