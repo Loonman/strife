@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Strife.Domain.UserStorage;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -29,8 +30,15 @@ namespace Strife
         public SplashPage()
         {
             this.InitializeComponent();
-
-            NavigateToLoginPage();
+            var userStore = new UserStore();
+            if (userStore.hasToken())
+            {
+                NavigateToMainPage(userStore.getToken());
+            }
+            else
+            {
+                NavigateToLoginPage();
+            }
         }
 
         private int viewId;
@@ -42,6 +50,23 @@ namespace Strife
             {
                 var frame = new Frame();
                 frame.Navigate(typeof(LoginPage));
+                Window.Current.Content = frame;
+                Window.Current.Activate();
+
+                viewId = ApplicationView.GetForCurrentView().Id;
+            });
+
+            await ApplicationViewSwitcher.SwitchAsync(viewId, currentId);
+        }
+
+        private async void NavigateToMainPage(string token)
+        {
+            var currentId = ApplicationView.GetForCurrentView().Id;
+            var view = CoreApplication.CreateNewView();
+            await view.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                var frame = new Frame();
+                frame.Navigate(typeof(MainPage), token);
                 Window.Current.Content = frame;
                 Window.Current.Activate();
 

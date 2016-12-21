@@ -24,11 +24,19 @@ namespace Strife.ViewModels
 
         private async void LoadGuilds()
         {
-            var guilds = await _guildStore.GetGuildsAsync();
+            try
+            {
+                var guilds = await _guildStore.GetGuildsAsync();
+                guilds.Select(g => GuildViewModel.FromUserGuild(g))
+                 .ToList()
+                 .ForEach(g => Guilds.Add(g));
+            }
+            catch (Exception e)
+            {
+                LoadGuilds();
+            }
 
-            guilds.Select(g => GuildViewModel.FromUserGuild(g))
-                  .ToList()
-                  .ForEach(g => Guilds.Add(g));
+           
         }
     }
 }

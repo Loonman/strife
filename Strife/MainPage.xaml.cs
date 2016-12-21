@@ -67,12 +67,14 @@ namespace Strife
             await gateway.ConnectAsync();
 
             var messageStore = new MessageStore(channelService, gateway);
-            var messageProvider = new MessageProvider(messageStore, "81384956881809408");
-
             var channelStore = new GuildChannelStore(guildService, gateway);
-            var channelProvider = new GuildChannelProvider(channelStore, "81384788765712384");
-
             var guildStore = new GuildStore(userService);
+
+            var guilds = await guildStore.GetGuildsAsync();
+            var channels = await channelStore.GetChannelsAsync(guilds.First().Id);
+
+            var messageProvider = new MessageProvider(messageStore, channels.First().Id);
+            var channelProvider = new GuildChannelProvider(channelStore, guilds.First().Id);
 
             MessagesViewModel = new MessagesViewModel(messageProvider);
             ChannelsViewModel = new ChannelsViewModel(channelProvider);

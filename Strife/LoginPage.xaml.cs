@@ -18,6 +18,7 @@ using Windows.Data.Xml.Dom;
 using login = Discord_UWP.API.Login;
 using auth = Discord_UWP.Authentication;
 using Discord_UWP.API;
+using Strife.Domain.UserStorage;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -37,11 +38,12 @@ namespace Strife
         {
             var password = strifePassword.Password;
             var userName = strifeLogin.Text;
+            var userStore = new UserStore();
 
             try
             {
                 login.Models.LoginResult result = await this.sendLoginRequest(userName, password);
-                loginError.Text = $"You did it nerd: {result.Token}";
+                userStore.setToken(result.Token);
                 this.Frame.Navigate(typeof(MainPage), result.Token);
             }
             catch

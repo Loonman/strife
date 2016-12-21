@@ -105,6 +105,9 @@
     <Compile Include="Domain\MessageStorage\IMessageStore.cs" />
     <Compile Include="Domain\MessageStorage\MessageProvider.cs" />
     <Compile Include="Domain\MessageStorage\MessageStore.cs" />
+    <Compile Include="Domain\UserStorage\IUserStore.cs" />
+    <Compile Include="Domain\UserStorage\NotAuthenticatedException.cs" />
+    <Compile Include="Domain\UserStorage\UserStore.cs" />
     <Compile Include="LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
