@@ -37,6 +37,9 @@ namespace Strife
     public sealed partial class MainPage : Page
     {
         public MainPageViewModel MainPageViewModel { get; set; }
+        public GuildsViewModel GuildsViewModel { get; set; }
+        public ChannelsViewModel ChannelsViewModel { get; set; }
+        public MessagesViewModel MessagesViewModel { get; set; }
         public DiscordAuthenticator authenticator { get; set; }
 
         public MainPage()

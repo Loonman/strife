@@ -16,12 +16,15 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <RelativePanel x:Name="LoginPanel" >
+        <RelativePanel x:Name="LoginPanel" 
+                       Background="#1E2124">
             <Button x:Name="loginButton" 
                     Content="login"
                     RelativePanel.AlignVerticalCenterWithPanel="True"
                     RelativePanel.AlignHorizontalCenterWithPanel="True"
-                    Margin="0,15,0,0" Click="loginButton_Click"/>
+                    Margin="0,15,0,0" 
+                    Click="loginButton_Click"
+                    Background="{ThemeResource SystemControlBackgroundAccentBrush}"/>
             <PasswordBox x:Name="strifePassword"
                          RelativePanel.Above="loginButton"
                          HorizontalAlignment="Center"
@@ -47,11 +50,17 @@
             <TextBlock x:Name="emailPrompt"
                        RelativePanel.Above="strifeLogin"
                        RelativePanel.AlignHorizontalCenterWith="strifeLogin"
-                       Text="Username"/>
+                       Text="Username"
+                       FontWeight="SemiBold"
+                       Foreground="{ThemeResource SystemControlForegroundAccentBrush}"
+                       />
             <TextBlock x:Name="passwordPrompt"
                        RelativePanel.Above="strifePassword"
                        RelativePanel.AlignHorizontalCenterWith="strifeLogin"
-                       Text="Password"/>
+                       Text="Password"
+                       FontWeight="SemiBold"
+                       Foreground="{ThemeResource SystemControlForegroundAccentBrush}"
+                       />
         </RelativePanel>
     </Grid>
 </Page>

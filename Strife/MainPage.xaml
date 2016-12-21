@@ -14,8 +14,8 @@
                 <Grid/>
             </CommandBar.Content>
 
-            <AppBarButton Icon="World" Label="appbarbutton" Tapped="AppBarButton_Tapped"/>
-            <AppBarButton Icon="Contact" Label="appbarbutton"/>
+            <AppBarButton Icon="List" Label="Channels &amp; Guilds" Tapped="AppBarButton_Tapped"/>
+            <AppBarButton Icon="Contact" Label="Contact"/>
         </CommandBar>
     </Page.BottomAppBar>
 

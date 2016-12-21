@@ -15,6 +15,7 @@ namespace Strife.ViewModels
     {
         private readonly MessageProvider _messageProvider;
         private string messageFieldContent = "";
+        public ObservableCollection<MessageGroupViewModel> MessageGroups { get; set; } = new ObservableCollection<MessageGroupViewModel>();
 
         public string MessageFieldContent
         {
@@ -22,7 +23,7 @@ namespace Strife.ViewModels
             set { SetProperty(ref messageFieldContent, value); }
         }
 
-        public ObservableCollection<MessageGroupViewModel> MessageGroups { get; set; } = new ObservableCollection<MessageGroupViewModel>();
+       
 
         public MessagesViewModel(MessageProvider messageProvider)
         {
