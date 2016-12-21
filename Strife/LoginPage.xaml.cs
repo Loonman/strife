@@ -19,6 +19,7 @@ using login = Discord_UWP.API.Login;
 using auth = Discord_UWP.Authentication;
 using Discord_UWP.API;
 using Strife.Domain.UserStorage;
+using Discord_UWP.API.Login.Models;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -44,16 +45,18 @@ namespace Strife
             {
                 login.Models.LoginResult result = await this.sendLoginRequest(userName, password);
                 userStore.setToken(result.Token);
-                this.Frame.Navigate(typeof(MainPage), result.Token);
+                NavigateToMainPage(result.Token);
             }
             catch
             {
                 loginError.Text = "Login failed: invalid username or password";
             }
-
-           
         }
 
+        private void NavigateToMainPage(string token)
+        {
+            this.Frame.Navigate(typeof(MainPage), token);
+        }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
