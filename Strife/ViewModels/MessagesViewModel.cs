@@ -8,6 +8,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
+using Windows.UI.Core;
 
 namespace Strife.ViewModels
 {
@@ -34,7 +36,12 @@ namespace Strife.ViewModels
 
         private void OnMessageCreated(object sender, MessageCreatedEventArgs e)
         {
-            ThreadingUtils.DoOnMainThread(() => AddMessage(e.Message));
+            //ThreadingUtils.DoOnMainThread(() => AddMessage(e.Message));
+            MainPage.dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                () =>
+                {
+                    AddMessage(e.Message);
+                });
         }
 
         public async void OnSendClick()

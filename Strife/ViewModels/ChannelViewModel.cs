@@ -7,17 +7,19 @@ using System.Threading.Tasks;
 
 namespace Strife.ViewModels
 {
-    public class TextChannelViewModel
+    public class ChannelViewModel : NotificationBase
     {
         public string Id { get; set; }
         public string Name { get; set; }
+        public string Type { get; set; }
 
-        public static TextChannelViewModel FromGuildChannel(GuildChannel channel)
+        public static ChannelViewModel FromGuildChannel(GuildChannel channel)
         {
-            return new TextChannelViewModel
+            return new ChannelViewModel
             {
                 Id = channel.Id,
-                Name = channel.Name
+                Name = channel.Name,
+                Type = channel.Type
             };
         }
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Strife.ViewModels
 {
-    public class MessageViewModel
+    public class MessageViewModel : NotificationBase
     {
         private readonly Message _message;
 

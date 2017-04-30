@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Strife.ViewModels
 {
-    public class GuildViewModel
+    public class GuildViewModel : NotificationBase
     {
         public string Id { get; set; }
         public string Name { get; set; }

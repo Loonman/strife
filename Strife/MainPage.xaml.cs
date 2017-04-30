@@ -37,10 +37,8 @@ namespace Strife
     public sealed partial class MainPage : Page
     {
         public MainPageViewModel MainPageViewModel { get; set; }
-        public GuildsViewModel GuildsViewModel { get; set; }
-        public ChannelsViewModel ChannelsViewModel { get; set; }
-        public MessagesViewModel MessagesViewModel { get; set; }
         public DiscordAuthenticator authenticator { get; set; }
+        public static CoreDispatcher dispatcher { get; private set; }
 
         public MainPage()
         {       
@@ -58,7 +56,7 @@ namespace Strife
                 BaseUrl = "wss://gateway.discord.gg/"
             };
 
-            
+            dispatcher = Windows.UI.Core.CoreWindow.GetForCurrentThread().Dispatcher;
             var authenticatedRestFactory = new AuthenticatedRestFactory(apiConfig, authenticator);
 
             var channelService = authenticatedRestFactory.GetChannelService();
@@ -111,7 +109,7 @@ namespace Strife
 
         private void StackPanel_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            TextChannelViewModel guild = ((sender as StackPanel).DataContext as TextChannelViewModel);
+            ChannelViewModel guild = ((sender as StackPanel).DataContext as ChannelViewModel);
             MainPageViewModel.OnChannelTapped(guild);
             ((INotifyCollectionChanged)messagesListView.ItemsSource).CollectionChanged += OnMessagesListChange;
         }

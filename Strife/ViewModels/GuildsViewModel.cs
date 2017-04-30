@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Strife.ViewModels
 {
-    public class GuildsViewModel
+    public class GuildsViewModel : NotificationBase
     {
         public ObservableCollection<GuildViewModel> Guilds { get; set; } = new ObservableCollection<GuildViewModel>();
 

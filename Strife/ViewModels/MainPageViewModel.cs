@@ -56,7 +56,7 @@ namespace Strife.ViewModels
             ChannelsViewModel = new ChannelsViewModel(channelProvider);
         }
 
-        public void OnChannelTapped(TextChannelViewModel textChannelViewModel)
+        public void OnChannelTapped(ChannelViewModel textChannelViewModel)
         {
             var messageProvider = new MessageProvider(_messageStore, textChannelViewModel.Id);
             MessagesViewModel = new MessagesViewModel(messageProvider);
